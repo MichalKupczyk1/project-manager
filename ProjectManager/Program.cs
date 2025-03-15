@@ -1,5 +1,7 @@
 
 using ProjectManager.Database;
+using ProjectManager.Database.Repositories;
+using ProjectManager.Database.Repositories.Interfaces;
 
 namespace ProjectManager
 {
@@ -16,6 +18,8 @@ namespace ProjectManager
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<AppDbContext>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 
             var app = builder.Build();
 
