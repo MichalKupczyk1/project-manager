@@ -1,4 +1,4 @@
-﻿namespace ProjectManager.Database.Models
+﻿namespace ProjectManager.Database.Entities
 {
     public class Project
     {
@@ -6,6 +6,6 @@
         public string Name { get; set; }
         public string Description { get; set; }
         public User Owner { get; set; }
-        public int OwnerId { get; set; }
+        public int? OwnerId { get; set; }
     }
 }

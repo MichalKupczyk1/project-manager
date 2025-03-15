@@ -1,4 +1,4 @@
-﻿namespace ProjectManager.Database.Models
+﻿namespace ProjectManager.Database.Entities
 {
     public class User
     {
@@ -6,6 +6,6 @@
         public string Login { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-        public virtual ICollection<Project> Projects { get; set; }
+        public virtual ICollection<Project> Projects { get; set; } = new List<Project>();
     }
 }
