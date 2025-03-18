@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ProjectManager.Database.Entities;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using ProjectManager.Application.Handlers.CreateUser;
+using ProjectManager.Application.Handlers.GetUser;
+using ProjectManager.Application.Handlers.UserHandlers.UpdateUser;
 using ProjectManager.Database.Repositories.Interfaces;
+using ProjectManager.Models.DTO.User;
 
 namespace ProjectManager.Controllers
 {
@@ -8,27 +12,34 @@ namespace ProjectManager.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        private const string GetUserStr = "GetUser";
         private readonly IUserRepository _userRepository;
+        private readonly IMediator _mediator;
 
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserRepository userRepository, IMediator mediator)
         {
             _userRepository = userRepository;
+            _mediator = mediator;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = GetUserStr)]
         public async Task<IActionResult> GetById(int id)
         {
-            var user = await _userRepository.GetUserById(id);
+            var getQuery = new GetUserQuery() { Id = id };
 
-            return user != null ? Ok(user) : BadRequest();
+            var result = await _mediator.Send(getQuery);
+
+            return result != null ? Ok(result) : BadRequest();
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddUser(User user)
+        public async Task<IActionResult> AddUser(UserAddDTO userDTO)
         {
-            var addedUser = await _userRepository.AddNewUser(user);
+            var createCommand = new CreateUserCommand() { Email = userDTO.Email, Login = userDTO.Login, Password = userDTO.Password };
 
-            return addedUser != null ? Ok(addedUser) : BadRequest();
+            var result = await _mediator.Send(createCommand);
+
+            return result != null ? CreatedAtRoute(GetUserStr, routeValues: new { id = result.Data }, value: result.IsSuccess) : BadRequest();
         }
 
         [HttpDelete]
@@ -40,11 +51,19 @@ namespace ProjectManager.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateUser(User user)
+        public async Task<IActionResult> UpdateUser(UserUpdateDTO userUpdateDTO)
         {
-            var updatedUser = await _userRepository.UpdateUser(user);
+            var updateCommand = new UpdateUserCommand()
+            {
+                Email = userUpdateDTO.Email,
+                Id = userUpdateDTO.Id,
+                Login = userUpdateDTO.Login,
+                Password = userUpdateDTO.Password
+            };
 
-            return updatedUser != null ? Ok(updatedUser) : BadRequest();
+            var result = await _mediator.Send(updateCommand);
+
+            return result != null ? Ok(result.IsSuccess) : BadRequest();
         }
     }
 }

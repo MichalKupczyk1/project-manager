@@ -2,6 +2,7 @@
 using ProjectManager.Database;
 using ProjectManager.Database.Repositories;
 using ProjectManager.Database.Repositories.Interfaces;
+using System.Reflection;
 
 namespace ProjectManager
 {
@@ -20,6 +21,9 @@ namespace ProjectManager
             builder.Services.AddDbContext<AppDbContext>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+
+            var applicationAssembly = Assembly.Load("ProjectManager.Application");
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(applicationAssembly));
 
             var app = builder.Build();
 
