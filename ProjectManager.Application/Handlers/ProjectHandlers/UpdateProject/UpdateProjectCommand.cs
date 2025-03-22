@@ -2,7 +2,7 @@
 
 namespace ProjectManager.Application.Handlers.ProjectHandlers.UpdateProject
 {
-    internal class UpdateProjectCommand : CreateProjectCommand
+    public class UpdateProjectCommand : CreateProjectCommand
     {
         public int Id { get; set; }
     }

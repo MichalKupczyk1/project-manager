@@ -5,7 +5,7 @@ using ProjectManager.Database.Repositories.Interfaces;
 
 namespace ProjectManager.Application.Handlers.ProjectHandlers.CreateProject
 {
-    internal class CreateProjectHandler : IRequestHandler<CreateProjectCommand, CommandResult>
+    public class CreateProjectHandler : IRequestHandler<CreateProjectCommand, CommandResult>
     {
         private readonly IProjectRepository _projectRepository;
         private readonly IUserRepository _userRepository;

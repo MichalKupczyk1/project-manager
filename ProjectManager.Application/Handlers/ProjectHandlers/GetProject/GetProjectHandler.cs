@@ -19,6 +19,9 @@ namespace ProjectManager.Application.Handlers.ProjectHandlers.GetProject
             var project = await _projectRepository.GetProjectById(request.Id);
             var result = new GetProjectResult();
 
+            if (project == null)
+                throw new Exception("Project with given Id not found");
+
             if (project.OwnerId.HasValue)
             {
                 var owner = await _userRepository.GetUserById(project.OwnerId.Value);

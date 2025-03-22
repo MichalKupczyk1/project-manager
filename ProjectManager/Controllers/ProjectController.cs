@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using ProjectManager.Application.Handlers.ProjectHandlers.CreateProject;
+using ProjectManager.Application.Handlers.ProjectHandlers.DeleteProject;
+using ProjectManager.Application.Handlers.ProjectHandlers.GetProject;
+using ProjectManager.Application.Handlers.ProjectHandlers.UpdateProject;
 using ProjectManager.Database.Entities;
-using ProjectManager.Database.Repositories.Interfaces;
 
 namespace ProjectManager.Controllers
 {
@@ -8,39 +12,55 @@ namespace ProjectManager.Controllers
     [ApiController]
     public class ProjectController : ControllerBase
     {
-        private readonly IProjectRepository _projectRepository;
+        private readonly IMediator _mediator;
 
-        public ProjectController(IProjectRepository projectRepository)
+        public ProjectController(IMediator mediator)
         {
-            _projectRepository = projectRepository;
+            _mediator = mediator;
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var project = await _projectRepository.GetProjectById(id);
+            try
+            {
+                var getProjectQuery = new GetProjectQuery() { Id = id };
 
-            return project != null ? Ok(project) : BadRequest();
+                var result = await _mediator.Send(getProjectQuery);
+                return result != null ? Ok(result) : BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            return await _projectRepository.DeleteProject(id) ? Ok() : BadRequest();
+            var deleteProjectCommand = new DeleteProjectCommand() { Id = id };
+
+            var result = await _mediator.Send(deleteProjectCommand);
+
+            return result != null ? Ok(result) : BadRequest();
         }
 
         [HttpPost]
         public async Task<IActionResult> AddProject(Project project)
         {
-            var addedProject = await _projectRepository.AddNewProject(project);
+            var createProject = new CreateProjectCommand() { Name = project.Name, Description = project.Description, OwnerId = project.OwnerId };
 
-            return addedProject != null ? Ok(addedProject) : BadRequest();
+            var result = await _mediator.Send(createProject);
+
+            return result != null ? Ok(result) : BadRequest();
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateProject(Project project)
         {
-            var updatedProject = await _projectRepository.UpdateProject(project);
+            var updateProjectCommand = new UpdateProjectCommand() { Id = project.Id, Description = project.Description, Name = project.Name, OwnerId = project.OwnerId };
+
+            var updatedProject = await _mediator.Send(updateProjectCommand);
 
             return updatedProject != null ? Ok(updatedProject) : BadRequest();
         }

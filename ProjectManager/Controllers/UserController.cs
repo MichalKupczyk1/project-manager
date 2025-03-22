@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using ProjectManager.Application.Handlers.CreateUser;
 using ProjectManager.Application.Handlers.GetUser;
+using ProjectManager.Application.Handlers.UserHandlers.DeleteUser;
 using ProjectManager.Application.Handlers.UserHandlers.UpdateUser;
-using ProjectManager.Database.Repositories.Interfaces;
 using ProjectManager.Models.DTO.User;
 
 namespace ProjectManager.Controllers
@@ -13,12 +13,10 @@ namespace ProjectManager.Controllers
     public class UserController : ControllerBase
     {
         private const string GetUserStr = "GetUser";
-        private readonly IUserRepository _userRepository;
         private readonly IMediator _mediator;
 
-        public UserController(IUserRepository userRepository, IMediator mediator)
+        public UserController(IMediator mediator)
         {
-            _userRepository = userRepository;
             _mediator = mediator;
         }
 
@@ -45,9 +43,11 @@ namespace ProjectManager.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteUserById(int id)
         {
-            var deleted = await _userRepository.DeleteUser(id);
+            var deleteCommand = new DeleteUserCommand() { Id = id };
 
-            return deleted ? Ok() : BadRequest();
+            var result = await _mediator.Send(deleteCommand);
+
+            return result != null ? Ok(result.IsSuccess) : BadRequest();
         }
 
         [HttpPut]
