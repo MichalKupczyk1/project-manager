@@ -3,7 +3,7 @@ using ProjectManager.Application.Shared;
 using ProjectManager.Database.Entities;
 using ProjectManager.Database.Repositories.Interfaces;
 
-namespace ProjectManager.Application.Handlers.CreateUser
+namespace ProjectManager.Application.Handlers.UserHandlers.CreateUser
 {
     internal class CreateUserHandler : IRequestHandler<CreateUserCommand, CommandResult>
     {
@@ -22,7 +22,7 @@ namespace ProjectManager.Application.Handlers.CreateUser
                 Password = request.Password
             };
 
-            var addedUser = await _userRepository.AddNewUser(userToAdd);
+            var addedUser = await _userRepository.AddNewUser(userToAdd, cancellationToken);
 
             return new CommandResult()
             {

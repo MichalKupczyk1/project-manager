@@ -12,23 +12,23 @@ namespace ProjectManager.Database.Repositories
             _context = context;
         }
 
-        public async Task<User> AddNewUser(User user)
+        public async Task<User> AddNewUser(User user, CancellationToken cancellationToken)
         {
-            var addedUser = await _context.Users.AddAsync(user);
+            var addedUser = await _context.Users.AddAsync(user, cancellationToken);
 
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
 
             return addedUser.Entity;
         }
 
-        public async Task<bool> DeleteUser(int id)
+        public async Task<bool> DeleteUser(int id, CancellationToken cancellationToken)
         {
             var userToDelete = await _context.Users.FindAsync(id);
 
             if (userToDelete != null)
             {
                 _context.Users.Remove(userToDelete);
-                var result = await _context.SaveChangesAsync();
+                var result = await _context.SaveChangesAsync(cancellationToken);
 
                 return result == 1;
             }
@@ -36,15 +36,15 @@ namespace ProjectManager.Database.Repositories
             return false;
         }
 
-        public async Task<User> GetUserById(int id)
+        public async Task<User> GetUserById(int id, CancellationToken cancellationToken)
         {
-            return (await _context.Users.FindAsync(id))!;
+            return (await _context.Users.FindAsync(id, cancellationToken))!;
         }
 
-        public async Task<User> UpdateUser(User user)
+        public async Task<User> UpdateUser(User user, CancellationToken cancellationToken)
         {
             var updatedUser = _context.Users.Update(user);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
 
             return updatedUser.Entity;
         }

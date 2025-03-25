@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using ProjectManager.Database.Repositories.Interfaces;
 
-namespace ProjectManager.Application.Handlers.GetUser
+namespace ProjectManager.Application.Handlers.UserHandlers.GetUser
 {
     internal class GetUserHandler : IRequestHandler<GetUserQuery, GetUserResult>
     {
@@ -13,7 +13,7 @@ namespace ProjectManager.Application.Handlers.GetUser
 
         public async Task<GetUserResult> Handle(GetUserQuery request, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.GetUserById(request.Id);
+            var user = await _userRepository.GetUserById(request.Id, cancellationToken);
 
             return new GetUserResult() { Email = user?.Email, Login = user?.Login };
         }

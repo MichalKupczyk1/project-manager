@@ -1,4 +1,4 @@
-﻿namespace ProjectManager.Application.Handlers.GetUser
+﻿namespace ProjectManager.Application.Handlers.UserHandlers.GetUser
 {
     public class GetUserResult
     {

@@ -16,7 +16,7 @@ namespace ProjectManager.Application.Handlers.ProjectHandlers.GetProject
 
         public async Task<GetProjectResult> Handle(GetProjectQuery request, CancellationToken cancellationToken)
         {
-            var project = await _projectRepository.GetProjectById(request.Id);
+            var project = await _projectRepository.GetProjectById(request.Id, cancellationToken);
             var result = new GetProjectResult();
 
             if (project == null)
@@ -24,7 +24,7 @@ namespace ProjectManager.Application.Handlers.ProjectHandlers.GetProject
 
             if (project.OwnerId.HasValue)
             {
-                var owner = await _userRepository.GetUserById(project.OwnerId.Value);
+                var owner = await _userRepository.GetUserById(project.OwnerId.Value, cancellationToken);
                 result.OwnerLogin = owner?.Login;
             }
             result.Description = project?.Description;

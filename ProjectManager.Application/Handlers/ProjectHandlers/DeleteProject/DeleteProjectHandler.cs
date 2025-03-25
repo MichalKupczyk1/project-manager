@@ -14,7 +14,7 @@ namespace ProjectManager.Application.Handlers.ProjectHandlers.DeleteProject
 
         public async Task<CommandResult> Handle(DeleteProjectCommand request, CancellationToken cancellationToken)
         {
-            var deleted = await _projectRepository.DeleteProject(request.Id);
+            var deleted = await _projectRepository.DeleteProject(request.Id, cancellationToken);
 
             return new CommandResult() { IsSuccess = deleted };
         }

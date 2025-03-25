@@ -15,13 +15,13 @@ namespace ProjectManager.Application.Handlers.UserHandlers.UpdateUser
 
         public async Task<CommandResult> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
-            var userToUpdate = await _userRepository.GetUserById(request.Id);
+            var userToUpdate = await _userRepository.GetUserById(request.Id, cancellationToken);
             var success = false;
 
             if (userToUpdate != null)
             {
                 UpdateUserData(userToUpdate, request);
-                var result = await _userRepository.UpdateUser(userToUpdate);
+                var result = await _userRepository.UpdateUser(userToUpdate, cancellationToken);
                 success = result != null;
             }
 

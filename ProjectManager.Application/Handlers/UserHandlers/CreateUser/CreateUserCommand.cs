@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using ProjectManager.Application.Shared;
 
-namespace ProjectManager.Application.Handlers.CreateUser
+namespace ProjectManager.Application.Handlers.UserHandlers.CreateUser
 {
     public class CreateUserCommand : IRequest<CommandResult>
     {

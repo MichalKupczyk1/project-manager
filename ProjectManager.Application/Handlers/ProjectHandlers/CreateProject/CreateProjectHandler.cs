@@ -24,10 +24,10 @@ namespace ProjectManager.Application.Handlers.ProjectHandlers.CreateProject
                 Name = request.Name,
                 Description = request.Description,
                 OwnerId = request.OwnerId,
-                Owner = request.OwnerId.HasValue ? await _userRepository.GetUserById(request.OwnerId.Value) : null,
+                Owner = request.OwnerId.HasValue ? await _userRepository.GetUserById(request.OwnerId.Value, cancellationToken) : null,
             };
 
-            var addedProject = await _projectRepository.AddNewProject(project);
+            var addedProject = await _projectRepository.AddNewProject(project, cancellationToken);
 
             return new CommandResult() { IsSuccess = project != null, Data = project?.Id };
         }

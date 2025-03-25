@@ -15,7 +15,7 @@ namespace ProjectManager.Application.Handlers.UserHandlers.DeleteUser
 
         public async Task<CommandResult> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
-            var userDeleted = await _userRepository.DeleteUser(request.Id);
+            var userDeleted = await _userRepository.DeleteUser(request.Id, cancellationToken);
 
             return new CommandResult() { IsSuccess = userDeleted };
         }

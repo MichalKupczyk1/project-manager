@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using ProjectManager.Application.Handlers.CreateUser;
+using ProjectManager.Application.Handlers.UserHandlers.CreateUser;
 using ProjectManager.Application.Shared;
 
 namespace ProjectManager.Application.Handlers.UserHandlers.UpdateUser
