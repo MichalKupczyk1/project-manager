@@ -30,7 +30,8 @@ namespace ProjectManager.Database.Configurations
 
             builder.HasOne(x => x.Owner)
                 .WithMany(x => x.Projects)
-                .HasForeignKey(x => x.OwnerId);
+                .HasForeignKey(x => x.OwnerId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }
