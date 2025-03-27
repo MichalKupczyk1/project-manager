@@ -1,6 +1,6 @@
-﻿using ProjectManager.Database.Entities;
+﻿using ProjectManager.Domain.Entities;
 
-namespace ProjectManager.Database.Repositories.Interfaces
+namespace ProjectManager.Domain.Interfaces
 {
     public interface IProjectRepository
     {

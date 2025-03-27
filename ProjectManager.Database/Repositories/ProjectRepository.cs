@@ -1,5 +1,5 @@
-﻿using ProjectManager.Database.Entities;
-using ProjectManager.Database.Repositories.Interfaces;
+﻿using ProjectManager.Domain.Entities;
+using ProjectManager.Domain.Interfaces;
 
 namespace ProjectManager.Database.Repositories
 {

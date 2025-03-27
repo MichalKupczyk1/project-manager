@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using ProjectManager.Application.Shared;
-using ProjectManager.Database.Entities;
-using ProjectManager.Database.Repositories.Interfaces;
+using ProjectManager.Domain.Entities;
+using ProjectManager.Domain.Interfaces;
 
 namespace ProjectManager.Application.Handlers.ProjectHandlers.CreateProject
 {

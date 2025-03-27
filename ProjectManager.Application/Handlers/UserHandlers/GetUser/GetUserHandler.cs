@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using ProjectManager.Database.Repositories.Interfaces;
+using ProjectManager.Domain.Interfaces;
 
 namespace ProjectManager.Application.Handlers.UserHandlers.GetUser
 {

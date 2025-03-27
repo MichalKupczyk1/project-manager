@@ -4,7 +4,7 @@ using ProjectManager.Application.Handlers.ProjectHandlers.CreateProject;
 using ProjectManager.Application.Handlers.ProjectHandlers.DeleteProject;
 using ProjectManager.Application.Handlers.ProjectHandlers.GetProject;
 using ProjectManager.Application.Handlers.ProjectHandlers.UpdateProject;
-using ProjectManager.Database.Entities;
+using ProjectManager.Domain.Entities;
 
 namespace ProjectManager.Controllers
 {
@@ -22,17 +22,12 @@ namespace ProjectManager.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id, CancellationToken cancellationToken)
         {
-            try
-            {
-                var getProjectQuery = new GetProjectQuery() { Id = id };
 
-                var result = await _mediator.Send(getProjectQuery, cancellationToken);
-                return result != null ? Ok(result) : BadRequest();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var getProjectQuery = new GetProjectQuery() { Id = id };
+
+            var result = await _mediator.Send(getProjectQuery, cancellationToken);
+
+            return result != null ? Ok(result) : BadRequest();
         }
 
         [HttpDelete("{id}")]

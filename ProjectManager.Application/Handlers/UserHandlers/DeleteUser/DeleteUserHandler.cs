@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using ProjectManager.Application.Shared;
-using ProjectManager.Database.Repositories.Interfaces;
+using ProjectManager.Domain.Interfaces;
 
 namespace ProjectManager.Application.Handlers.UserHandlers.DeleteUser
 {

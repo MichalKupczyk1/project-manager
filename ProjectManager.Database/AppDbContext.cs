@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjectManager.Database.Configurations;
-using ProjectManager.Database.Entities;
+using ProjectManager.Domain.Entities;
 
 namespace ProjectManager.Database
 {

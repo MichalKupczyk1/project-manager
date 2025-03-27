@@ -1,4 +1,4 @@
-﻿namespace ProjectManager.Database.Entities
+﻿namespace ProjectManager.Domain.Entities
 {
     public class User
     {

@@ -1,5 +1,6 @@
 ﻿using MediatR;
-using ProjectManager.Database.Repositories.Interfaces;
+using ProjectManager.Domain.Exceptions;
+using ProjectManager.Domain.Interfaces;
 
 namespace ProjectManager.Application.Handlers.ProjectHandlers.GetProject
 {
@@ -20,7 +21,7 @@ namespace ProjectManager.Application.Handlers.ProjectHandlers.GetProject
             var result = new GetProjectResult();
 
             if (project == null)
-                throw new Exception("Project with given Id not found");
+                throw new NotFoundException("Project with given Id not found");
 
             if (project.OwnerId.HasValue)
             {

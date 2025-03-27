@@ -1,6 +1,7 @@
 using ProjectManager.Database;
 using ProjectManager.Database.Repositories;
-using ProjectManager.Database.Repositories.Interfaces;
+using ProjectManager.Domain.Interfaces;
+using ProjectManager.Middleware.Exception;
 using System.Reflection;
 
 namespace ProjectManager
@@ -36,6 +37,8 @@ namespace ProjectManager
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
+
+            app.ConfigureExceptionHandler();
 
             app.MapControllers();
 
