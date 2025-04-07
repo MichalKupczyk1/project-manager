@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ProjectManager.Domain.Entities;
 
-namespace ProjectManager.Database.Configurations
+namespace ProjectManager.Infrastructure.Configurations
 {
     public class ProjectConfiguration : IEntityTypeConfiguration<Project>
     {

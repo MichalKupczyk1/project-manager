@@ -25,6 +25,9 @@ namespace ProjectManager.Application.Handlers.UserHandlers.UpdateUser
                 success = result != null;
             }
 
+            if (!success)
+                throw new Exception("Failed to update user");
+
             return new CommandResult() { IsSuccess = success };
         }
 

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using ProjectManager.Application.Shared;
 using ProjectManager.Domain.Entities;
+using ProjectManager.Domain.Exceptions;
 using ProjectManager.Domain.Interfaces;
 
 namespace ProjectManager.Application.Handlers.ProjectHandlers.CreateProject
@@ -28,6 +29,9 @@ namespace ProjectManager.Application.Handlers.ProjectHandlers.CreateProject
             };
 
             var addedProject = await _projectRepository.AddNewProject(project, cancellationToken);
+
+            if (addedProject == null)
+                throw new Exception("Failed to add new project with given data");
 
             return new CommandResult() { IsSuccess = project != null, Data = project?.Id };
         }

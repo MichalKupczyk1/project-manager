@@ -1,7 +1,8 @@
 ﻿using ProjectManager.Domain.Entities;
 using ProjectManager.Domain.Interfaces;
+using ProjectManager.Infrastructure;
 
-namespace ProjectManager.Database.Repositories
+namespace ProjectManager.Infrastructure.Repositories
 {
     public class ProjectRepository : IProjectRepository
     {
@@ -9,7 +10,7 @@ namespace ProjectManager.Database.Repositories
 
         public ProjectRepository(AppDbContext context)
         {
-            this._context = context;
+            _context = context;
         }
 
         public async Task<Project> AddNewProject(Project project, CancellationToken cancellationToken)

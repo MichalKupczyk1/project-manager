@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using ProjectManager.Application.Shared;
 using ProjectManager.Domain.Entities;
+using ProjectManager.Domain.Exceptions;
 using ProjectManager.Domain.Interfaces;
 
 namespace ProjectManager.Application.Handlers.ProjectHandlers.UpdateProject
@@ -20,6 +21,9 @@ namespace ProjectManager.Application.Handlers.ProjectHandlers.UpdateProject
                 return new CommandResult() { IsSuccess = false };
 
             var updatedProject = await UpdateProjectData(request, projectToUpdate, cancellationToken);
+
+            if (updatedProject == null)
+                throw new BadRequestException("Failed to update project with given Id and data");
 
             return new CommandResult() { IsSuccess = updatedProject != null, Data = updatedProject?.Id };
         }

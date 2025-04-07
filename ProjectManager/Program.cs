@@ -1,6 +1,6 @@
-using ProjectManager.Database;
-using ProjectManager.Database.Repositories;
 using ProjectManager.Domain.Interfaces;
+using ProjectManager.Infrastructure;
+using ProjectManager.Infrastructure.Repositories;
 using ProjectManager.Middleware.Exception;
 using System.Reflection;
 
@@ -24,6 +24,8 @@ namespace ProjectManager
 
             var applicationAssembly = Assembly.Load("ProjectManager.Application");
             builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(applicationAssembly));
+            builder.Services.AddAutoMapper(applicationAssembly);
+            builder.Services.AddHostedService<HostedService>();
 
             var app = builder.Build();
 

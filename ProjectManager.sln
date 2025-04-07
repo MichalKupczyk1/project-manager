@@ -5,7 +5,7 @@ VisualStudioVersion = 17.12.35514.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectManager", "ProjectManager\ProjectManager.csproj", "{FB3EDCBD-20DB-43D4-9429-16DF31FF3427}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectManager.Database", "ProjectManager.Database\ProjectManager.Database.csproj", "{926059F2-7F5A-4350-9CA0-53BB64DAC721}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectManager.Infrastructure", "ProjectManager.Database\ProjectManager.Infrastructure.csproj", "{926059F2-7F5A-4350-9CA0-53BB64DAC721}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectManager.Application", "ProjectManager.Application\ProjectManager.Application.csproj", "{102B1810-8932-4497-956C-DE9278732155}"
 EndProject
@@ -36,5 +36,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {22C5820A-E5A6-491D-B6FB-38B863F6C997}
 	EndGlobalSection
 EndGlobal

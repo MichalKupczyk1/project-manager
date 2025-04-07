@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using ProjectManager.Application.Shared;
 using ProjectManager.Domain.Entities;
+using ProjectManager.Domain.Exceptions;
 using ProjectManager.Domain.Interfaces;
 
 namespace ProjectManager.Application.Handlers.UserHandlers.CreateUser
@@ -23,6 +24,9 @@ namespace ProjectManager.Application.Handlers.UserHandlers.CreateUser
             };
 
             var addedUser = await _userRepository.AddNewUser(userToAdd, cancellationToken);
+
+            if (addedUser == null)
+                throw new BadRequestException("Failed to create user with given data");
 
             return new CommandResult()
             {

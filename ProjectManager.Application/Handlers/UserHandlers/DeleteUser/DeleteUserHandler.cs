@@ -17,6 +17,9 @@ namespace ProjectManager.Application.Handlers.UserHandlers.DeleteUser
         {
             var userDeleted = await _userRepository.DeleteUser(request.Id, cancellationToken);
 
+            if (!userDeleted)
+                throw new Exception("Failed to delete user with given Id");
+
             return new CommandResult() { IsSuccess = userDeleted };
         }
     }

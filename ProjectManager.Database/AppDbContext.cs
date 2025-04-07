@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProjectManager.Database.Configurations;
 using ProjectManager.Domain.Entities;
+using ProjectManager.Infrastructure.Configurations;
 
-namespace ProjectManager.Database
+namespace ProjectManager.Infrastructure
 {
     public class AppDbContext : DbContext
     {

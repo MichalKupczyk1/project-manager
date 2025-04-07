@@ -20,7 +20,7 @@ namespace ProjectManager.Middleware.Exception
                         var errors = new List<string>();
                         switch (contextFeature.Error)
                         {
-                            case NotFoundException ex:
+                            case BadRequestException ex:
                                 context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                                 message = ex.Message;
                                 break;

@@ -1,7 +1,7 @@
 ﻿using ProjectManager.Domain.Entities;
 using ProjectManager.Domain.Interfaces;
 
-namespace ProjectManager.Database.Repositories
+namespace ProjectManager.Infrastructure.Repositories
 {
     public class UserRepository : IUserRepository
     {
